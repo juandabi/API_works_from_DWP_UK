@@ -1,5 +1,4 @@
 anyio==3.6.1
-asttokens @ file:///opt/conda/conda-bld/asttokens_1646925590279/work
 backcall @ file:///home/ktietz/src/ci/backcall_1611930011877/work
 beautifulsoup4==4.11.1
 certifi @ file:///opt/conda/conda-bld/certifi_1655968806487/work/certifi
