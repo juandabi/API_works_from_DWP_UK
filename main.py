@@ -12,6 +12,7 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
+    """
     # Get connection to database
     engine = engine_db()
     #Scrapping the website
@@ -24,4 +25,5 @@ async def root():
     # read data from database
     df = read_from_db('jobs',engine)
     data = df.to_dict(orient='records')
-    return data
+    """
+    return "Prueba de app funcionando"#data
