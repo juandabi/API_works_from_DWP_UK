@@ -8,7 +8,7 @@ from scrapping import main as scrapping
 def engine():
  #Make a connection to the database
     try:
-        engine = create_engine("mysql+mysqldb://root:Juanda1013-@localhost/jobs_from_web")
+        engine = create_engine("mysql://b4a632817019ce:7058b342@us-cdbr-east-06.cleardb.net/heroku_5073876714a6911?reconnect=true")
     except Exception as e:
         print("Error: Unable to connect to database,","error:",e)
     else:
