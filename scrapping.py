@@ -47,7 +47,7 @@ def get_last_page(url):
     return last_page
 
 def get_website_apply(url):
-    response = requests.get(url)
+    response = requests.get(url, timeout=5)
     website_apply = response.url
     return website_apply
 
