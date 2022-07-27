@@ -5,13 +5,13 @@ from sqlalchemy import Table, Column, String, MetaData
 import pandas as pd
 from scrapping import main as scrapping
 from credentials import db_credentials
-
+import os
 
 def engine():
  #Make a connection to the database
     try:
-        credentials = db_credentials()
-        engine = create_engine(f'credentials')
+        credentials = os.getenv('CLEARDB_DATABASE_URL')
+        engine = create_engine(f'{credentials}')
     except Exception as e:
         print("Error: Unable to connect to database,","error:",e)
     else:
