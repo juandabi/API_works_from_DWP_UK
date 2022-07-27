@@ -126,6 +126,7 @@ def iterate_jobs_in_page(url):
             'a', class_='govuk-link').get('href')
         job_details = get_details_from_job(link)
         list_of_jobs_details.append(job_details)
+        print(f'{len(list_of_jobs_details)} jobs scraped')
 
     return list_of_jobs_details
 
@@ -135,7 +136,7 @@ def iterate_pages(url):
     input:
     return: dataframe of jobs details
     """
-    last_page = int(get_last_page(url))
+    last_page = 1#int(get_last_page(url))
     print(f'total pages: {last_page}')
     list_of_jobs_details = iterate_jobs_in_page(url)
     print('page: 1 done')

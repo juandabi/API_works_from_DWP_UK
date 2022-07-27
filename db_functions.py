@@ -8,7 +8,7 @@ from scrapping import main as scrapping
 def engine():
  #Make a connection to the database
     try:
-        engine = create_engine("mysql://b5c079a59a5627:a05309fc@us-cdbr-east-06.cleardb.net/heroku_203bd9f126b90c4?reconnect=true")
+        engine = create_engine("mysql://b5c079a59a5627:a05309fc@us-cdbr-east-06.cleardb.net/heroku_203bd9f126b90c4")
     except Exception as e:
         print("Error: Unable to connect to database,","error:",e)
     else:
@@ -21,7 +21,7 @@ def create_table_db(table_name, engine):
     table_name = Table(
     f'{table_name}', meta,
     Column('title', String(500), nullable = False),
-    Column('link_info', String(500),primary_key = True, nullable = False),
+    Column('link_info', String(200),primary_key = True, nullable = False),
     Column('posting_date', Date, nullable = False),
     Column('closing_date', Date, nullable = False),
     Column('company', String(500), nullable = False),
@@ -76,4 +76,3 @@ def main(data,engine):
     connection.close()
     engine.dispose()
     print('Closed connection')
-#%%
