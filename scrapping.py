@@ -136,7 +136,7 @@ def iterate_pages(url):
     input:
     return: dataframe of jobs details
     """
-    last_page = 1#int(get_last_page(url))
+    last_page = int(get_last_page(url))
     print(f'total pages: {last_page}')
     list_of_jobs_details = iterate_jobs_in_page(url)
     print('page: 1 done')
