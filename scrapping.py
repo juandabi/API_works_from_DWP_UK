@@ -48,7 +48,7 @@ def get_last_page(url):
 
 def get_website_apply(url):
     try:
-        response = requests.get(url, timeout=5, verify=False)
+        response = requests.get(url, timeout=5)
         website_apply = response.url
     except Exception as e:
         website_apply = url
