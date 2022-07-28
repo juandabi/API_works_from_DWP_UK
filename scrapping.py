@@ -47,8 +47,12 @@ def get_last_page(url):
     return last_page
 
 def get_website_apply(url):
-    response = requests.get(url, timeout=5)
-    website_apply = response.url
+    try:
+        response = requests.get(url, timeout=5, verify=False)
+        website_apply = response.url
+    except Exception as e:
+        website_apply = url
+        print(e)
     return website_apply
 
 def get_details_from_job(link_info):
@@ -135,25 +139,7 @@ def iterate_jobs_in_page(url):
 
     return df_jobs
 
-def iterate_pages(url):
-    """
-    Loop through all the pages
-    input:
-    return: dataframe of jobs details for each page
-    """
-    last_page = int(get_last_page(url))
-    print(f'total pages: {last_page}')
-    list_of_jobs_details = iterate_jobs_in_page(url)
-    print('page: 1 done')
-    for page in range (last_page, 0, -1):
-        new_url = f'{url}&page={page}'
-        list_of_jobs_details += iterate_jobs_in_page(new_url)
-        print(f'page: {page} done')
-    print(f'Scrapping is done')
-    return pd.DataFrame(list_of_jobs_details)
 
-def main(url):
-    list_jobs = iterate_pages(url)
-    return list_jobs
+
 #%%
 

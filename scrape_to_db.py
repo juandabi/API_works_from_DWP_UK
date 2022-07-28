@@ -12,6 +12,7 @@ def main():
     engine = engine_db()
     #Get days to scrap and url
     days = get_days(engine)
+    print(f'Days to scrap: {days}')
     url = f'https://findajob.dwp.gov.uk/search?pp=50&f={days}'
     #Scrapping the website
     print('Start scrapping')
@@ -35,3 +36,4 @@ def main():
 main()
 
 # %%
+#days to scrap 111
