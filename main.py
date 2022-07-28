@@ -14,13 +14,6 @@ app = FastAPI()
 async def root():
     # Get connection to database
     engine = engine_db()
-    #Scrapping the website
-    days = get_days(engine)
-    url = f'https://findajob.dwp.gov.uk/search?pp=5&f={days}'
-    scrapping_data = scrapping(url)
-    # execute function to save data to database
-    #engine = engine_db()
-    save_to_db(scrapping_data,engine)
     # read data from database
     df = read_from_db('jobs',engine)
     data = df.to_dict(orient='records')

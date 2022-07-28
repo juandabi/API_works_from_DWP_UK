@@ -4,7 +4,6 @@ from sqlalchemy import TEXT, Date, create_engine
 from sqlalchemy import Table, Column, String, MetaData
 import pandas as pd
 from scrapping import main as scrapping
-from credentials import db_credentials
 import os
 
 def engine():
@@ -45,6 +44,8 @@ def read_from_db(table_name,engine):
     return df
 
 def save_data_to_table(data,engine):
+    #Verify if the temporary table exists
+    engine.execute('DROP TABLE IF EXISTS jobs_temp;')
     #create temporary table
     create_table_db('jobs_temp',engine)
     print('temporary table created')
@@ -55,9 +56,10 @@ def save_data_to_table(data,engine):
     print('table jobs created')
     query = 'SELECT * FROM jobs_temp WHERE link_info NOT IN (SELECT link_info FROM jobs);'
     new_entries = pd.read_sql(query, engine)
-    print('new entries found')
+    print('new entries found:', len(new_entries.index))
     new_entries.to_sql('jobs', engine, if_exists='append', index=False)
-    engine.execute('DROP TABLE jobs_temp;')
+    #Delete temporary table
+    engine.execute('DROP TABLE IF EXISTS jobs_temp;')
 
 def get_days(engine):
     query = 'SELECT posting_date FROM jobs ORDER BY posting_date DESC LIMIT 1;'

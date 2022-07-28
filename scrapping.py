@@ -128,19 +128,24 @@ def iterate_jobs_in_page(url):
         list_of_jobs_details.append(job_details)
         print(f'{len(list_of_jobs_details)} jobs scraped')
 
-    return list_of_jobs_details
+    #Convert list to dataframe
+    df_jobs = pd.DataFrame(list_of_jobs_details)
+    df_jobs.fillna('None', inplace=True)
+
+
+    return df_jobs
 
 def iterate_pages(url):
     """
     Loop through all the pages
     input:
-    return: dataframe of jobs details
+    return: dataframe of jobs details for each page
     """
     last_page = int(get_last_page(url))
     print(f'total pages: {last_page}')
     list_of_jobs_details = iterate_jobs_in_page(url)
     print('page: 1 done')
-    for page in range(2, last_page + 1):
+    for page in range (last_page, 0, -1):
         new_url = f'{url}&page={page}'
         list_of_jobs_details += iterate_jobs_in_page(new_url)
         print(f'page: {page} done')
@@ -149,6 +154,6 @@ def iterate_pages(url):
 
 def main(url):
     list_jobs = iterate_pages(url)
-    list_jobs.fillna('None', inplace=True)
     return list_jobs
+#%%
 
