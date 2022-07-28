@@ -3,7 +3,6 @@ from datetime import date
 from sqlalchemy import TEXT, Date, create_engine
 from sqlalchemy import Table, Column, String, MetaData
 import pandas as pd
-from scrapping import main as scrapping
 import os
 
 def engine():
