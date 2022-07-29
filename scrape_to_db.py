@@ -13,7 +13,7 @@ def main():
     #Get days to scrap and url
     days = get_days(engine)
     print(f'Days to scrap: {days}')
-    url = f'https://findajob.dwp.gov.uk/search?pp=50&f={days}'
+    url = f'https://findajob.dwp.gov.uk/search?pp=5&f={days}'
     #Scrapping the website
     print('Start scrapping')
     last_page = int(get_last_page(url))
