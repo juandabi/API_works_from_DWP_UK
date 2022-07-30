@@ -1,10 +1,10 @@
 #%%
 from datetime import date
-from sqlite3 import connect
 from sqlalchemy import TEXT, Date, create_engine
 from sqlalchemy import Table, Column, String, MetaData
 import pandas as pd
 import os
+
 
 
 def engine():
@@ -12,7 +12,6 @@ def engine():
     engine = None
     try:
         credentials = os.getenv('DATABASE_URL')
-
         engine = create_engine(f'{credentials}')
         engine.connect()
     except Exception as e:
@@ -20,7 +19,6 @@ def engine():
     else:
         print("Connection to database successful")
     return engine
-
 
 def create_table_db(table_name, engine):
     meta = MetaData(engine)
@@ -49,6 +47,11 @@ def read_from_db(table_name,engine):
     df = pd.read_sql(sql, engine)
     return df
 
+def jobs_count(engine):
+    query = 'SELECT COUNT(*) FROM jobs;'
+    df = pd.read_sql(query, engine)
+    return df.iloc[0][0]
+
 def save_data_to_table(data,engine):
     #Verify if the temporary table exists
     engine.execute('DROP TABLE IF EXISTS jobs_temp;')
@@ -66,6 +69,15 @@ def save_data_to_table(data,engine):
     new_entries.to_sql('jobs', engine, if_exists='append', index=False)
     #Delete temporary table
     engine.execute('DROP TABLE IF EXISTS jobs_temp;')
+
+def last_posting_date(engine):
+    query = 'SELECT posting_date FROM jobs ORDER BY posting_date DESC LIMIT 1;'
+    try:
+        df = pd.read_sql(query, engine)
+        last_date = df.iloc[0]['posting_date']
+    except:
+        last_date = date.today()
+    return last_date
 
 def get_days(engine):
     query = 'SELECT posting_date FROM jobs ORDER BY posting_date DESC LIMIT 1;'
@@ -98,8 +110,3 @@ def test(engine):
     engine.dispose()
     print('Closed connection')
 
-
-# %%
-engine()
-
-# %%

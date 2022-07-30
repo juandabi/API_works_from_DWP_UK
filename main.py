@@ -1,7 +1,8 @@
-#%%
 from datetime import date
 from fastapi import FastAPI
 from db_functions import engine as engine_db
+from db_functions import last_posting_date as last_posting_date_db
+from db_functions import jobs_count as jobs_count_db
 from db_functions import read_from_db as read_from_db
 from db_functions import get_days as get_days
 from pydantic import BaseModel
@@ -27,10 +28,14 @@ class Jobs_details(BaseModel):
     reference: str
 
 class response_data(BaseModel):
+    last_posting_date: date
+    jobs_count: int
     data : List[Jobs_details]
 
     class Config:
        schema_extra = {
+            "last_posting_date": "2022-06-30",
+            "jobs_count": 3564,
             "example": [{
                 "title": "Software Engineer",
                 "posting_date": "2020-01-01",
@@ -55,8 +60,10 @@ async def root():
     engine = engine_db()
     # read data from database
     df = read_from_db('jobs',engine)
+    last_update = last_posting_date_db(engine)
+    jobs_count = jobs_count_db(engine)
     data = df.to_dict(orient='records')
-    response = response_data(data=data)
+    response = response_data(last_posting_date=last_update,jobs_count=jobs_count ,data=data,)
     return response
 
 

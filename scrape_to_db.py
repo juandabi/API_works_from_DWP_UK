@@ -1,5 +1,6 @@
 #%%
 
+from datetime import datetime
 from db_functions import main as save_to_db
 from db_functions import engine as engine_db
 from db_functions import read_from_db as read_from_db
@@ -31,6 +32,7 @@ def main():
         save_to_db(jobs_details_for_page,engine)
         print(f'page {page} is saved to db')
     print('Scrapping is done')
+
 
 #%%
 main()
