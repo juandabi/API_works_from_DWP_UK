@@ -30,3 +30,4 @@ uvloop==0.16.0
 watchfiles==0.16.1
 websockets==10.3
 yarg==0.1.9
+python-dotenv==0.20.0

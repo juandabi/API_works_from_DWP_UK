@@ -5,7 +5,7 @@ from db_functions import last_posting_date as last_posting_date_db
 from db_functions import jobs_count as jobs_count_db
 from db_functions import jobs_available_count as jobs_available_count_db
 from db_functions import read_from_db as read_from_db
-from db_functions import available_jobs as available_jobs_db
+from db_functions import read_available_jobs as read_available_jobs_db
 
 from db_functions import get_days as get_days
 from pydantic import BaseModel
@@ -78,10 +78,9 @@ async def root():
     # Get connection to database
     engine = engine_db()
     # read data from database
-    df = read_from_db('jobs',engine)
+    data = read_from_db('jobs',engine)
     last_update = last_posting_date_db(engine)
     jobs_count = jobs_count_db(engine)
-    data = df.to_dict(orient='records')
     response = response_data(last_posting_date=last_update,jobs_count=jobs_count ,data=data,)
     return response
 
@@ -90,10 +89,9 @@ async def root():
     # Get connection to database
     engine = engine_db()
     # read data from database
-    df = available_jobs_db('jobs',engine)
+    data = read_available_jobs_db('jobs',engine)
     last_update = last_posting_date_db(engine)
     jobs_count = jobs_available_count_db(engine)
-    data = df.to_dict(orient='records')
     response = response_data(last_posting_date=last_update,jobs_count=jobs_count ,data=data,)
     return response
 

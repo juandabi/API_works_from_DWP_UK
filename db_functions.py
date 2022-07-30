@@ -1,17 +1,20 @@
 #%%
 from datetime import date
+from xml.sax.handler import feature_external_ges
 from sqlalchemy import TEXT, Date, create_engine
 from sqlalchemy import Table, Column, String, MetaData
 import pandas as pd
 import os
+from dotenv import load_dotenv
 
+load_dotenv()
 
 
 def engine():
  #Make a connection to the database
     engine = None
     try:
-        credentials = os.getenv('DATABASE_URL')
+        credentials = os.getenv('LOCAL_DATABASE_URL')
         engine = create_engine(f'{credentials}')
         engine.connect()
     except Exception as e:
@@ -43,9 +46,15 @@ def create_table_db(table_name, engine):
     table_name.create(checkfirst=True)
 
 def read_from_db(table_name,engine):
-    sql = f'SELECT * FROM {table_name}'
-    df = pd.read_sql(sql, engine)
-    return df
+    sql = f'SELECT json_agg({table_name}) FROM {table_name}'
+    data = engine.execute(sql).fetchone()[0]
+    return data
+
+def read_available_jobs(table_name,engine):
+    today = str(date.today())
+    sql = f'SELECT json_agg({table_name}) FROM {table_name} WHERE closing_date >= current_date;'
+    data = engine.execute(sql).fetchone()[0]
+    return data
 
 def jobs_count(engine):
     query = 'SELECT COUNT(*) FROM jobs;'
@@ -95,11 +104,7 @@ def get_days(engine):
         days = 500
     return days
 
-def available_jobs(table_name,engine):
-    today = str(date.today())
-    sql = f'SELECT * FROM {table_name} WHERE closing_date >= current_date;'
-    df = pd.read_sql(sql, engine)
-    return df
+
 
 def main(data,engine):
     #start connection to database
@@ -120,4 +125,3 @@ def test(engine):
     connection.close()
     engine.dispose()
     print('Closed connection')
-
