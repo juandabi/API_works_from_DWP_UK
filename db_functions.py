@@ -12,7 +12,8 @@ def engine():
     engine = None
     try:
         credentials = os.getenv('DATABASE_URL')
-        engine = create_engine(f'{credentials}')
+        local_credentials = 'postgresql://p_rw_bd108e58753541558d7cb7e67f434964:bo6lDFn81F--niVd5f1t5loMzJQflhHsf6CJYR0HrnW_dTy7DpIR-u_JxdiCVpl6@pg-tunnel.borealis-data.com:5432/d7587c40f4c6d801c88ed5982d6f219df'
+        engine = create_engine(f'{local_credentials}')
         engine.connect()
     except Exception as e:
         print("Error: Unable to connect to database,","error:",e)
@@ -49,6 +50,11 @@ def read_from_db(table_name,engine):
 
 def jobs_count(engine):
     query = 'SELECT COUNT(*) FROM jobs;'
+    df = pd.read_sql(query, engine)
+    return df.iloc[0][0]
+
+def jobs_available_count(engine):
+    query = 'SELECT COUNT(*) FROM jobs WHERE closing_date >= current_date;'
     df = pd.read_sql(query, engine)
     return df.iloc[0][0]
 
@@ -89,6 +95,12 @@ def get_days(engine):
     except:
         days = 500
     return days
+
+def available_jobs(table_name,engine):
+    today = str(date.today())
+    sql = f'SELECT * FROM {table_name} WHERE closing_date >= current_date;'
+    df = pd.read_sql(sql, engine)
+    return df
 
 def main(data,engine):
     #start connection to database
