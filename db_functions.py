@@ -12,8 +12,7 @@ def engine():
     engine = None
     try:
         credentials = os.getenv('DATABASE_URL')
-        local_credentials = 'postgresql://p_rw_bd108e58753541558d7cb7e67f434964:bo6lDFn81F--niVd5f1t5loMzJQflhHsf6CJYR0HrnW_dTy7DpIR-u_JxdiCVpl6@pg-tunnel.borealis-data.com:5432/d7587c40f4c6d801c88ed5982d6f219df'
-        engine = create_engine(f'{local_credentials}')
+        engine = create_engine(f'{credentials}')
         engine.connect()
     except Exception as e:
         print("Error: Unable to connect to database,","error:",e)
