@@ -1,4 +1,5 @@
 #%%
+import time
 import pandas as pd
 from datetime import datetime
 
@@ -68,8 +69,11 @@ def get_details_from_job(link_info):
     #Get title jobs
     title = soup.find('h1', class_='govuk-heading-l').text.replace('  ', '').replace('\n', '')
     #Get website apply link
-    link = soup.find('a', class_='govuk-button govuk-button--start').get('href')
-    website_apply = get_website_apply(link)
+    try:
+        link = soup.find('a', class_='govuk-button govuk-button--start').get('href')
+        website_apply = get_website_apply(link)
+    except:
+        website_apply = link_info
     #Get description jobs
     description = soup.find('div', itemprop='description').get_text('\n').replace('\n\n\n\n',' \n ').replace('  ', '')
 
@@ -123,6 +127,7 @@ def iterate_jobs_in_page(url):
     # Get lists of jobs
     jobs = soup.find_all('div', class_='search-result')
     # For loop to go through the jobs
+    print('jobs:', sep=' ', end=' ', flush=True)
 
     for job in jobs:
         # get title job
@@ -130,7 +135,7 @@ def iterate_jobs_in_page(url):
             'a', class_='govuk-link').get('href')
         job_details = get_details_from_job(link)
         list_of_jobs_details.append(job_details)
-        print(f'{len(list_of_jobs_details)} jobs scraped')
+        print(f'{len(list_of_jobs_details)}', sep='-', end=' ', flush=True)
 
     #Convert list to dataframe
     df_jobs = pd.DataFrame(list_of_jobs_details)
@@ -139,7 +144,4 @@ def iterate_jobs_in_page(url):
 
     return df_jobs
 
-
-
-#%%
 

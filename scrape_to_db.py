@@ -1,6 +1,5 @@
 #%%
 
-from datetime import datetime
 from db_functions import main as save_to_db
 from db_functions import engine as engine_db
 from db_functions import read_from_db as read_from_db
@@ -16,26 +15,25 @@ def main():
     print(f'Days to scrap: {days}')
     url = f'https://findajob.dwp.gov.uk/search?pp=50&f={days}'
     #Scrapping the website
-    print('Start scrapping')
-    last_page = int(get_last_page(url))
-    print(f'total pages: {last_page}')
+    last_page =  4452 #int(get_last_page(url))
+    print(f'Start scrapping total pages: {last_page}')
     # Iterate through all the pages
     for page in range (last_page, 0, -1):
-        print('----------------------')
-        print(f'Start scrapping page {page} ')
+        print('-------------------------------------------------------------')
+        print(f'Start scrapping page: {page}')
         page_url = f'{url}&page={page}'
         #scrap each page and save the data in a dataframe
         jobs_details_for_page = iterate_jobs_in_page(page_url)
-        jobs_details_for_page.fillna('None', inplace=True)
-        print(f'page {page} is scraped')
+        # jobs_details_for_page.fillna('None', inplace=True)
         #Save data from each page to db
         save_to_db(jobs_details_for_page,engine)
-        print(f'page {page} is saved to db')
+        print(f'| page {page} is saved |')
     print('Scrapping is done')
 
 
 #%%
-main()
+if __name__ == '__main__':
+  main()
 
 # %%
 #days to scrap 111

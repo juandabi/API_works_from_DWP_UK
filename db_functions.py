@@ -71,15 +71,12 @@ def save_data_to_table(data,engine):
     engine.execute('DROP TABLE IF EXISTS jobs_temp;')
     #create temporary table
     create_table_db('jobs_temp',engine)
-    print('temporary table created')
     #Save data to temporary table
     data.to_sql('jobs_temp', engine, if_exists='append', index=False)
-    print('data saved to temporary table')
     create_table_db('jobs',engine)
-    print('table jobs created')
     query = 'SELECT * FROM jobs_temp WHERE link_info NOT IN (SELECT link_info FROM jobs);'
     new_entries = pd.read_sql(query, engine)
-    print('new entries found:', len(new_entries.index))
+    print(f'| new entries found:{len(new_entries.index)} |', sep=' | ', end=' ', flush=True)
     new_entries.to_sql('jobs', engine, if_exists='append', index=False)
     #Delete temporary table
     engine.execute('DROP TABLE IF EXISTS jobs_temp;')
@@ -114,7 +111,6 @@ def main(data,engine):
     #Close connection and dispose database
     connection.close()
     engine.dispose()
-    print('Closed connection')
 
 def test(engine):
     #start connection to database
@@ -125,3 +121,4 @@ def test(engine):
     connection.close()
     engine.dispose()
     print('Closed connection')
+
