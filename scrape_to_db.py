@@ -15,7 +15,7 @@ def main():
     print(f'Days to scrap: {days}')
     url = f'https://findajob.dwp.gov.uk/search?pp=50&f={days}'
     #Scrapping the website
-    last_page =  4452 #int(get_last_page(url))
+    last_page =  int(get_last_page(url))
     print(f'Start scrapping total pages: {last_page}')
     # Iterate through all the pages
     for page in range (last_page, 0, -1):

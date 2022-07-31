@@ -14,7 +14,7 @@ def engine():
  #Make a connection to the database
     engine = None
     try:
-        credentials = os.getenv('DATABASE_URL')
+        credentials = os.getenv('LOCAL_DATABASE_URL')
         engine = create_engine(f'{credentials}')
         engine.connect()
     except Exception as e:
