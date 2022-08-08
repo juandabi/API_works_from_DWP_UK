@@ -1,7 +1,6 @@
 beautifulsoup4==4.11.1
 fastapi==0.79.0
 httptools==0.4.0
-mysqlclient==2.1.1
 numpy==1.23.1
 pandas==1.4.3
 psycopg2==2.9.3
