@@ -22,9 +22,13 @@ lxml==4.9.1
 >>>>>>> change requirement file
 numpy==1.23.1
 pandas==1.4.3
+<<<<<<< HEAD
 pipreqs==0.4.11
 psycopg2-binary==2.9.3
 pydantic==1.9.1
+=======
+psycopg2-binary==2.9.3
+>>>>>>> Change requirements file
 python-dotenv==0.20.0
 pytz==2022.1
 PyYAML==6.0
