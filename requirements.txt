@@ -17,9 +17,17 @@ h11==0.13.0
 httptools==0.4.0
 <<<<<<< HEAD
 idna==3.3
+<<<<<<< HEAD
 lxml==4.9.1
 =======
 >>>>>>> change requirement file
+=======
+<<<<<<< HEAD
+mypy-extensions==0.4.3
+=======
+lxml==4.9.1
+>>>>>>> develop
+>>>>>>> Accept merge
 numpy==1.23.1
 pandas==1.4.3
 <<<<<<< HEAD
