@@ -1,6 +1,5 @@
 #%%
 from datetime import date
-from xml.sax.handler import feature_external_ges
 from sqlalchemy import TEXT, Date, create_engine
 from sqlalchemy import Table, Column, String, MetaData
 import pandas as pd
@@ -14,7 +13,7 @@ def engine():
  #Make a connection to the database
     engine = None
     try:
-        credentials = os.getenv('LOCAL_DATABASE_URL')
+        credentials = os.getenv('DATABASE_URL')
         engine = create_engine(f'{credentials}')
         engine.connect()
     except Exception as e:
@@ -100,8 +99,6 @@ def get_days(engine):
     except:
         days = 500
     return days
-
-
 
 def main(data,engine):
     #start connection to database
