@@ -5,6 +5,7 @@ services:
     image: apiworksfromdwpuk
     build:
       context: .
-      dockerfile: ./Dockerfile
+      dockerfile: Dockerfile
+    container_name: apiworksfromdwpuk
     ports:
-      - 8000:8000
+      - 8000:90
