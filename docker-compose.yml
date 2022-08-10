@@ -2,10 +2,10 @@ version: '3.4'
 
 services:
   apiworksfromdwpuk:
-    image: apiworksfromdwpuk
+    image: api_dwp_jobs
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: apiworksfromdwpuk
+    container_name: api_dwp_jobs
     ports:
-      - 8000:90
+      - 8000:8000
