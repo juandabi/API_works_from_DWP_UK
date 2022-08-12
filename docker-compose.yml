@@ -9,5 +9,5 @@ services:
     container_name: api_dwp_jobs
     ports:
       - 8000:8000
-    extra_hosts:
-      - "host.docker.internal:172.17.0.1"
+    # extra_hosts:
+    #   - "host.docker.internal:172.17.0.1"
