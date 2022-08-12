@@ -16,6 +16,7 @@ gunicorn==20.1.0
 h11==0.13.0
 httptools==0.4.0
 <<<<<<< HEAD
+<<<<<<< HEAD
 idna==3.3
 <<<<<<< HEAD
 <<<<<<< HEAD
@@ -33,6 +34,8 @@ lxml==4.9.1
 >>>>>>> Accept merge
 =======
 >>>>>>> change in requirefile
+=======
+>>>>>>> change requirement file
 numpy==1.23.1
 pandas==1.4.3
 <<<<<<< HEAD
