@@ -2,10 +2,10 @@ import os
 
 from dotenv import load_dotenv
 
-from db_functions import engine as engine_db
-from db_functions import get_days as get_days
-from db_functions import main as save_to_db
-from db_functions import read_from_db as read_from_db
+from app.db_functions import engine as engine_db
+from app.db_functions import get_days as get_days
+from app.db_functions import main as save_to_db
+from app.db_functions import read_from_db as read_from_db
 from scrape_functions import get_last_page as get_last_page
 from scrape_functions import iterate_jobs_in_page as iterate_jobs_in_page
 

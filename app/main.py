@@ -6,13 +6,13 @@ from dotenv import load_dotenv
 from fastapi import FastAPI, Request
 from pydantic import BaseModel
 
-from db_functions import engine as engine_db
-from db_functions import get_days as get_days
-from db_functions import jobs_available_count as jobs_available_count_db
-from db_functions import jobs_count as jobs_count_db
-from db_functions import last_posting_date as last_posting_date_db
-from db_functions import read_available_jobs as read_available_jobs_db
-from db_functions import read_from_db as read_from_db
+from app.db_functions import engine as engine_db
+from app.db_functions import get_days as get_days
+from app.db_functions import jobs_available_count as jobs_available_count_db
+from app.db_functions import jobs_count as jobs_count_db
+from app.db_functions import last_posting_date as last_posting_date_db
+from app.db_functions import read_available_jobs as read_available_jobs_db
+from app.db_functions import read_from_db as read_from_db
 
 load_dotenv()
 app = FastAPI(title="API jobs from dwp")
