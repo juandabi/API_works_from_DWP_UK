@@ -1,7 +1,7 @@
 version: '3.4'
 
 services:
-  apiworksfromdwpuk:
+  api_dwp_jobs:
     image: api_dwp_jobs
     build:
       context: .
@@ -9,3 +9,5 @@ services:
     container_name: api_dwp_jobs
     ports:
       - 8000:8000
+    extra_hosts:
+      - "host.docker.internal:172.17.0.1"

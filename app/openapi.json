@@ -1,0 +1,187 @@
+{
+    "openapi": "3.0.2",
+    "servers": [
+        {
+            "url": "/app"
+        }
+    ],
+    "info": {
+        "title": "FastAPI",
+        "version": "0.1.0"
+    },
+    "paths": {
+        "/jobs": {
+            "get": {
+                "summary": "Root",
+                "operationId": "root_jobs_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/response_data"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/available_jobs": {
+            "get": {
+                "summary": "Root",
+                "operationId": "root_available_jobs_get",
+                "responses": {
+                    "200": {
+                        "description": "Successful Response",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/response_data"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Jobs_details": {
+                "title": "Jobs_details",
+                "required": [
+                    "title",
+                    "posting_date",
+                    "closing_date",
+                    "company",
+                    "location",
+                    "salary",
+                    "type_contract",
+                    "link_info",
+                    "website_apply",
+                    "hours_shifts",
+                    "description",
+                    "reference"
+                ],
+                "type": "object",
+                "properties": {
+                    "title": {
+                        "title": "Title",
+                        "type": "string"
+                    },
+                    "posting_date": {
+                        "title": "Posting Date",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "closing_date": {
+                        "title": "Closing Date",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "company": {
+                        "title": "Company",
+                        "type": "string"
+                    },
+                    "location": {
+                        "title": "Location",
+                        "type": "string"
+                    },
+                    "salary": {
+                        "title": "Salary",
+                        "type": "string"
+                    },
+                    "type_contract": {
+                        "title": "Type Contract",
+                        "type": "string"
+                    },
+                    "link_info": {
+                        "title": "Link Info",
+                        "type": "string"
+                    },
+                    "website_apply": {
+                        "title": "Website Apply",
+                        "type": "string"
+                    },
+                    "hours_shifts": {
+                        "title": "Hours Shifts",
+                        "type": "string"
+                    },
+                    "description": {
+                        "title": "Description",
+                        "type": "string"
+                    },
+                    "reference": {
+                        "title": "Reference",
+                        "type": "string"
+                    }
+                }
+            },
+            "response_data": {
+                "title": "response_data",
+                "required": [
+                    "last_posting_date",
+                    "jobs_count",
+                    "data"
+                ],
+                "type": "object",
+                "properties": {
+                    "last_posting_date": {
+                        "title": "Last Posting Date",
+                        "type": "string",
+                        "format": "date"
+                    },
+                    "jobs_count": {
+                        "title": "Jobs Count",
+                        "type": "integer"
+                    },
+                    "data": {
+                        "title": "Data",
+                        "type": "array",
+                        "items": {
+                            "$ref": "#/components/schemas/Jobs_details"
+                        }
+                    }
+                },
+                "example": [
+                    {
+                        "last_posting_date": "2022-06-30",
+                        "jobs_count": 3564,
+                        "data": [
+                            {
+                                "title": "Software Engineer",
+                                "posting_date": "2022-01-01",
+                                "closing_date": "2022-01-05",
+                                "salary": "£10,000 to £15,000",
+                                "hours_shifts": "Full time",
+                                "location": "London",
+                                "company": "DWP",
+                                "type_contract": "Permanent",
+                                "Information": "Information about the job",
+                                "Link_info": "www.dwp.gov.uk/details/12345",
+                                "reference": "12345",
+                                "website_apply": "www.company/apply/job/12345"
+                            },
+                            {
+                                "title": "developer Engineer",
+                                "posting_date": "2022-05-01",
+                                "closing_date": "2022-05-04",
+                                "salary": "£15,000 to £20,000",
+                                "hours_shifts": "Full time",
+                                "location": "London",
+                                "company": "DWP",
+                                "type_contract": "Permanent",
+                                "Information": "Information about the job",
+                                "Link_info": "www.dwp.gov.uk/details/6789",
+                                "reference": "6789",
+                                "website_apply": "www.company/apply/job/66789"
+                            }
+                        ]
+                    }
+                ]
+            }
+        }
+    }
+}
