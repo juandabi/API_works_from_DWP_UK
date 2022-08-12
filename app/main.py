@@ -79,11 +79,6 @@ class response_data(BaseModel):
         }
 
 
-@app.get("/app")
-def read_main(request: Request):
-    return {"message": "Hello World", "root_path": request.scope.get("root_path")}
-
-
 @app.get("/jobs", response_model=response_data)
 async def root():
     # Get connection to database
