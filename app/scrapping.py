@@ -15,7 +15,7 @@ load_dotenv()
 def main():
     try:
         # Get connection to database
-        credentials = os.getenv("DATABASE_URL_LOCALHOST")
+        credentials = os.getenv("DATABASE_URL")
         engine = engine_db(credentials)
         # Get days to scrap and url
         days = get_days(engine)
