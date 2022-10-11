@@ -19,6 +19,6 @@ def engine(databaseconfig):
     return engine
 
 
-credentials = os.getenv("DATABASE_URL_LOCALHOST")
+credentials = os.getenv("DATABASE_URL")
 print(credentials)
 engine(credentials)

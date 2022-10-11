@@ -12,6 +12,7 @@
 **/*.dbmdl
 **/*.jfm
 **/bin
+**/env_api_dwp
 **/charts
 **/docker-compose*
 **/compose*
