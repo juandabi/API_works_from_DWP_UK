@@ -125,3 +125,4 @@ env_api_dwp/
 .dmypy.json
 dmypy.json
 .vscode/settings.json
+nohup.out
